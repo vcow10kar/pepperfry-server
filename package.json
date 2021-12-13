@@ -1,0 +1,30 @@
+{
+  "name": "pepperfry-server",
+  "version": "1.0.0",
+  "description": "Pepperfry Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcow10kar/pepperfry-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vcow10kar/pepperfry-server/issues"
+  },
+  "homepage": "https://github.com/vcow10kar/pepperfry-server#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.1"
+  }
+}
