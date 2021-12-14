@@ -13,7 +13,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/products" }),
   (req, res) => {
-    res.redirect("/cart");
+    res.redirect("/products");
   }
 );
 
