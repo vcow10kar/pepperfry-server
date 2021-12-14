@@ -7,13 +7,13 @@ const User = require("../models/user.model");
 
 router.get("/", passport.authenticate("google", { scope: ["profile"] }));
 
-//googleauth callback
+//googleauth callback we will add redirect later
 
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/products" }),
   (req, res) => {
-    res.redirect("/brands");
+    res.redirect("/cart");
   }
 );
 
