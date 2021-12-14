@@ -5,6 +5,7 @@ const brandController = require('./controllers/brand.controller');
 const categoryController = require('./controllers/category.controller');
 const cartController = require('./controllers/cart.controller');
 const cartDetailsController = require('./controllers/cartDetails.controller');
+const productsController = require("./controllers/products.controller")
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use('/brands', brandController)
 app.use('/category',categoryController)
 app.use('/cart', cartController);
 app.use('/cartDetails', cartDetailsController);
+app.use('/products',productsController)
 
 
 module.exports = app;
