@@ -8,10 +8,10 @@ const productsSchema = new mongoose.Schema({
     details: {
         brand: { type: String, required: true },
         dimensitions: { type: String, required: true },
-        weight: { type: Number, required: true },
-        warranty: { type: Number, required: true },
+        weight: { type: String, required: true },
+        warranty: { type: String, required: true },
         assembly: { type: String, required: true },
-        primary_materials: { type: Array, required: true },
+        primary_materials: { type: String, required: true },
         room_type: { type: String, required: true },
         seating_height: { type: String, required: true },
         colour: { type: String, required: true },
