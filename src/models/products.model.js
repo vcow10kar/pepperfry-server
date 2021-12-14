@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const productsSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    // brand_id: { type: mongoose.Schema.Types.ObjectId, ref: 'brand' },
-    // category_id: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+    brand_id: { type: mongoose.Schema.Types.ObjectId, required:true, ref: 'brand' },
+    category_id: { type: mongoose.Schema.Types.ObjectId, required:true, ref: 'category' },
     price: { type: Number, required: true },
     details: {
         brand: { type: String, required: true },
@@ -24,6 +24,9 @@ const productsSchema = new mongoose.Schema({
         imgLink: { type: String, required: true }
     }],
     discount_percentage: { type: Number, required: true }
+},{
+    versionKey:false,
+    timestamps:true
 })
 
 module.exports = mongoose.model("products", productsSchema);
