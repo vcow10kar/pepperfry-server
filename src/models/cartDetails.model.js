@@ -10,6 +10,6 @@ let cartDetailsSchema = new mongoose.Schema({
     timestamps: true
 });
 
-let CartDetails = new mongoose.model('cartDetails', cartDetailsSchema);
+let CartDetails = mongoose.model('cartDetails', cartDetailsSchema);
 
 module.exports = CartDetails;
