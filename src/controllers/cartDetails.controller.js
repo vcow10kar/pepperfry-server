@@ -30,3 +30,5 @@ router.delete('/:id', async(req, res) => {
     return res.status(203).send({message: 'Item has been removed'});
 })
 
+
+module.exports = router;
