@@ -6,7 +6,9 @@ const Products = require("../models/products.model")
 
 router.get("/", async (req, res) => {
     
-    const products = await Products.find().lean().exec()
+    const products = await Products.find()
+    .populate({path: 'brand_id'})
+    .lean().exec()
     
     return res.status(201).send(products)
 })
@@ -14,7 +16,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     
-    const product = await Products.findById(req.params.id)
+    const product = await Products.findById(req.params.id).populate({path: 'brand_id'}).lean().exec();
     
     return res.status(201).send(product)
 })
