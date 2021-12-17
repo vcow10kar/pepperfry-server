@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("./config/Passport");
@@ -10,11 +11,19 @@ const cartDetailsController = require("./controllers/cartDetails.controller");
 const productsController = require("./controllers/products.controller");
 const userController = require("./controllers/user.controller");
 
-const app = express();
-app.use(passport.initialize());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/brands", brandController);
 app.use("/category", categoryController);
@@ -23,17 +32,21 @@ app.use("/cartDetails", cartDetailsController);
 app.use("/products", productsController);
 app.use("/auth", userController);
 
+const User = require("./models/user.model");
+
 //sessions middleware
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true },
-  })
-);
+
 
 //passport middleware
-app.use(passport.session());
+
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
 
 module.exports = app;

@@ -2,7 +2,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const User = require("../models/user.model");
-var GoogleStrategy = require("passport-google-oauth20").Strategy;
+var GoogleStrategy = require("passport-google-oauth2").Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -10,8 +10,11 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
+      userProfileURL: "https://**www**.googleapis.com/oauth2/v3/userinfo",  
+      passReqToCallback: true,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (request, accessToken, refreshToken, profile, done) => {
+      console.log("Profile", profile);
       const newUser = {
         googleId: profile.id,
         displayName: profile.displayName,
@@ -20,10 +23,10 @@ passport.use(
       try {
         let user = await User.findOne({ googleId: profile.id });
         if (user) {
-          done(null, user);
+          return done(null, user);
         } else {
           user = await User.create(newUser);
-          done(null, user);
+          return done(null, user);
         }
       } catch (err) {
         console.log(err);
@@ -31,14 +34,6 @@ passport.use(
     }
   )
 );
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
 
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
 
 module.exports = passport;
