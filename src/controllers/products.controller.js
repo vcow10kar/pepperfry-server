@@ -4,9 +4,8 @@ const router = express.Router();
 
 const Products = require("../models/products.model")
 
-router.get("/", async (req, res) => {
-    
-    const products = await Products.find()
+router.get("/category/:id", async (req, res) => {
+    const products = await Products.find({category_id: {$eq: req.params.id}})
     .populate({path: 'brand_id'})
     .lean().exec()
     
