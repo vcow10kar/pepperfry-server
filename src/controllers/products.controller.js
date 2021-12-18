@@ -5,9 +5,16 @@ const router = express.Router();
 const Products = require("../models/products.model")
 
 router.get("/category/:id", async (req, res) => {
+    const page = +req.query.page;
+    const size = +req.query.size || 8;
+
+    const offset = (page - 1) * size;
+
     const products = await Products.find({category_id: {$eq: req.params.id}})
     .populate({path: 'brand_id'})
-    .lean().exec()
+    .populate('category_id')
+    .skip(offset).limit(size)
+    .lean().exec();
     
     return res.status(201).send(products)
 })

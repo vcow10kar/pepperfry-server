@@ -14,11 +14,16 @@ passport.use(
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
-      console.log("Profile", profile);
+      // console.log("Profile", profile);
       const newUser = {
         googleId: profile.id,
         displayName: profile.displayName,
         image: profile.photos[0].value,
+        displayName: {
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName
+        },
+        email: profile.email
       };
       try {
         let user = await User.findOne({ googleId: profile.id });
