@@ -10,6 +10,7 @@ const cartController = require("./controllers/cart.controller");
 const cartDetailsController = require("./controllers/cartDetails.controller");
 const productsController = require("./controllers/products.controller");
 const userController = require("./controllers/user.controller");
+const orderController = require('./controllers/order.controller');
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use("/cart", cartController);
 app.use("/cartDetails", cartDetailsController);
 app.use("/products", productsController);
 app.use("/auth", userController);
+app.use("/order", orderController);
 
 const User = require("./models/user.model");
 
