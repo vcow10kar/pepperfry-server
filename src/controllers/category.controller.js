@@ -8,6 +8,12 @@ router.get('/', async (req, res) => {
     return res.send(data).status(200)
 })
 
+router.get('/search', async(req, res) => {
+    const data = await Category.find({name: {$regex: req.query.search, $options: 'i'}}).lean().exec();
+
+    return res.send(data).status(200);
+})
+
 router.post('/', async (req, res) => {
     const data = await Category.create(req.body)
     return res.send(data).status(201)
