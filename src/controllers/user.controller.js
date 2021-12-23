@@ -12,7 +12,7 @@ router.get("/", passport.authenticate("google", { scope: ["email", "profile"] })
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/products",
+    failureRedirect: `${process.env.FRONTEND_URL}/products`,
   }),
   (req, res) => {
     res.redirect(`${process.env.FRONTEND_URL}/delivery`);
