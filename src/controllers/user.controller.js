@@ -15,7 +15,7 @@ router.get(
     failureRedirect: "/products",
   }),
   (req, res) => {
-    res.redirect("http://localhost:3000/delivery");
+    res.redirect(`${process.env.FRONTEND_URL}/delivery`);
   }
 );
 
