@@ -12,7 +12,7 @@ const productsController = require("./controllers/products.controller");
 const userController = require("./controllers/user.controller");
 const orderController = require('./controllers/order.controller');
 
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
